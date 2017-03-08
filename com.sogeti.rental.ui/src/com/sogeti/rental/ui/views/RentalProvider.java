@@ -31,7 +31,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		// TODO Auto-generated method stub
 		
 		if (inputElement instanceof Collection<?>)
-			return ((Collection) inputElement).toArray();
+			return ((Collection<?>) inputElement).toArray();
 		
 		return null; //RentalCoreActivator.getAgency().;
 	}
