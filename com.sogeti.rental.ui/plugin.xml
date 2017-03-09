@@ -52,5 +52,14 @@
             file="contexts.xml">
       </contexts>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.sogeti.rental.ui.perspective.RentalPerspective"
+            icon="icons/sample.gif"
+            id="com.sogeti.rental.ui.perspective.RentalPerspective"
+            name="Rental">
+      </perspective>
+   </extension>
 
 </plugin>
