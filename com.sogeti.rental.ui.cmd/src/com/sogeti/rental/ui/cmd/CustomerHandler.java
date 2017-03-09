@@ -39,7 +39,7 @@ public class CustomerHandler extends AbstractHandler implements IHandler {
 		}
 		
 	 	Clipboard clipboard = new Clipboard(Display.getCurrent());
-		String rtfData = "{\\rtf1\\b\\i Hello World}";
+		String rtfData = "{\\rtf1\\b\\i "+textData+"}";
 		TextTransfer textTransfer = TextTransfer.getInstance();
 		RTFTransfer rtfTransfer = RTFTransfer.getInstance();
 		Transfer[] transfers = new Transfer[]{textTransfer, rtfTransfer};
