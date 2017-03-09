@@ -3,10 +3,12 @@ package com.sogeti.rental.ui.views;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
@@ -36,6 +38,12 @@ public class AgencyView extends ViewPart implements IPropertyChangeListener {
 		tv.setInput(agencies);
 		
 		tv.expandAll();
+		
+		MenuManager menuManager = new MenuManager();
+		Menu menu = menuManager.createContextMenu(tv.getControl());
+		tv.getControl().setMenu(menu);
+		getSite().registerContextMenu(menuManager, tv);
+		
 		
 		getSite().setSelectionProvider(tv);
 	}
