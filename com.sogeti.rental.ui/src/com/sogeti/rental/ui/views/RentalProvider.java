@@ -18,6 +18,7 @@ import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalObject;
+import com.sogeti.rental.ui.Palette;
 import com.sogeti.rental.ui.RentalUIConstants;
 import com.sogeti.rental.ui.RentalUIPreferenceColor;
 import com.sogeti.rental.ui.RentalUiActivator;
@@ -86,7 +87,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		return super.getText(element);
 	}
 	
-	class Node {
+	public class Node {
 		
 		@Override
 		public int hashCode() {
@@ -153,17 +154,22 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Color getForeground(Object element) {
 		// TODO Auto-generated method stub
-		if (element instanceof RentalAgency)
-			return Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
-		else if (element instanceof Customer)
-			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_CUSTOMER));
-		else if (element instanceof Node)
-			return Display.getCurrent().getSystemColor(SWT.COLOR_RED);
-		else if (element instanceof RentalObject)
-			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_OBJECT));
-		else if (element instanceof Rental)
-			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_RENTAL));
-		return null;
+		String palId = RentalUiActivator.getDefault().getPreferenceStore().getString(PREF_PALETTE);
+		Palette p = RentalUiActivator.getDefault().getPaletteManager().get(palId);
+		
+		return p.getProvider().getForeground(element);
+		
+//		if (element instanceof RentalAgency)
+//			return Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
+//		else if (element instanceof Customer)
+//			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_CUSTOMER));
+//		else if (element instanceof Node)
+//			return Display.getCurrent().getSystemColor(SWT.COLOR_RED);
+//		else if (element instanceof RentalObject)
+//			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_OBJECT));
+//		else if (element instanceof Rental)
+//			return getAColor( RentalUiActivator.getDefault().getPreferenceStore().getString(RentalUIPreferenceColor.PREF_COLOR_RENTAL));
+//		return null;
 	}
 	
 	private Color getAColor(String rgbKey){
@@ -200,6 +206,9 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Color getBackground(Object element) {
 		// TODO Auto-generated method stub
-		return null;
+		String palId = RentalUiActivator.getDefault().getPreferenceStore().getString(PREF_PALETTE);
+		Palette p = RentalUiActivator.getDefault().getPaletteManager().get(palId);
+		
+		return p.getProvider().getBackground(element);
 	};
 }

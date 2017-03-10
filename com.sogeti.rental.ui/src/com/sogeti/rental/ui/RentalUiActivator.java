@@ -1,10 +1,14 @@
 package com.sogeti.rental.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -15,11 +19,17 @@ import org.osgi.framework.FrameworkUtil;
  */
 public class RentalUiActivator extends AbstractUIPlugin implements RentalUIConstants {
 
+	public Map<String, Palette> getPaletteManager() {
+		return paletteManager;
+	}
+
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.sogeti.rental.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static RentalUiActivator plugin;
+	
+	private Map<String, Palette> paletteManager = new HashMap<>();
 	
 	/**
 	 * The constructor
@@ -36,10 +46,16 @@ public class RentalUiActivator extends AbstractUIPlugin implements RentalUIConst
 		plugin = this;
 		
 		IExtensionRegistry reg = Platform.getExtensionRegistry();
-		for (IConfigurationElement e : reg.getConfigurationElementsFor("org.eclipse.ui.views")){
+		for (IConfigurationElement e : reg.getConfigurationElementsFor("com.sogeti.rental.ui.palette")){
 			
-			String txtText = "plugin : " + e.getNamespaceIdentifier() + "\t vue : " + e.getAttribute("name");
-			if (e.getName().equals("view") )
+			Palette pal = new Palette();
+			pal.setId(e.getAttribute("id"));
+			pal.setName(e.getAttribute("name"));
+			pal.setProvider((IColorProvider) e.createExecutableExtension("class"));
+			
+			paletteManager.put(pal.getId(), pal);
+			
+			String txtText = "plugin : " + e.getNamespaceIdentifier() + "\t pal : " + e.getAttribute("name");
 				System.out.println(txtText);
 		}
 	}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="palette" name="palette" schema="schema/palette.exsd"/>
 
    <extension
          point="org.eclipse.ui.views">
@@ -67,6 +68,12 @@
             class="com.sogeti.rental.ui.RentalPreferencePage1"
             id="com.sogeti.rental.ui.page1"
             name="Rental">
+      </page>
+      <page
+            category="com.sogeti.rental.ui.page1"
+            class="com.sogeti.rental.ui.RentalColorPreferences"
+            id="com.sogeti.rental.ui.page.palette"
+            name="palette">
       </page>
       <page
             category="com.sogeti.rental.ui.page1"
@@ -138,6 +145,19 @@
             </command>
          </toolbar>
       </menuContribution>
+   </extension>
+   <extension
+         point="com.sogeti.rental.ui.palette">
+      <palette
+            class="com.sogeti.rental.ui.DefaultPalette"
+            id="com.sogeti.rental.ui.palette.default"
+            name="Default">
+      </palette>
+      <palette
+            class="com.sogeti.rental.ui.MochePalette"
+            id="com.sogeti.rental.ui.palette.moche"
+            name="Moche">
+      </palette>
    </extension>
 
 </plugin>
