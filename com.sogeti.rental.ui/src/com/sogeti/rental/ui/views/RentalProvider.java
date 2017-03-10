@@ -157,7 +157,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		String palId = RentalUiActivator.getDefault().getPreferenceStore().getString(PREF_PALETTE);
 		Palette p = RentalUiActivator.getDefault().getPaletteManager().get(palId);
 		
-		return p.getProvider().getForeground(element);
+		return p == null ? null :p.getProvider().getForeground(element);
 		
 //		if (element instanceof RentalAgency)
 //			return Display.getCurrent().getSystemColor(SWT.COLOR_BLACK);
@@ -209,6 +209,6 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 		String palId = RentalUiActivator.getDefault().getPreferenceStore().getString(PREF_PALETTE);
 		Palette p = RentalUiActivator.getDefault().getPaletteManager().get(palId);
 		
-		return p.getProvider().getBackground(element);
+		return p != null ? p.getProvider().getBackground(element) : null;
 	};
 }
