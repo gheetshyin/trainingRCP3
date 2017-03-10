@@ -5,7 +5,8 @@
    <extension
          id="application"
          point="org.eclipse.core.runtime.applications">
-      <application>
+      <application
+            icon="icons/eclipse32.png">
          <run
                class="com.sogeti.rental.rcp.Application">
          </run>
